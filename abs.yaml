@@ -1,0 +1,6 @@
+channels:
+  - https://staging.continuum.io/pbp/fs/ffmpy-feedstock/pr2/96673e7
+  - https://staging.continuum.io/pbp/fs/gradio-client-feedstock/pr1/ee9a443
+  - https://staging.continuum.io/pbp/fs/groovy-python-feedstock/pr1/2d7236c
+  - https://staging.continuum.io/pbp/fs/pydub-feedstock/pr2/16a16ef
+  - https://staging.continuum.io/pbp/fs/safehttpx-feedstock/pr1/f82b8b5
