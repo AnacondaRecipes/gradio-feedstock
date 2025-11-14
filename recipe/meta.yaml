@@ -69,12 +69,17 @@ test:
     - pip
 
 about:
-  home: https://pypi.org/project/gradio/
+  home: https://www.gradio.app/
   dev_url: https://github.com/gradio-app/gradio
+  doc_url: https://www.gradio.app/
   summary: Python library for easily interacting with trained machine learning models
+  description: |
+    Gradio is an open-source Python package that allows you to quickly build a demo or web application
+    for your machine learning model, API, or any arbitrary Python function.
   license: Apache-2.0
   license_file:
     - LICENSE
+  license_family: Apache
 
 extra:
   recipe-maintainers:
