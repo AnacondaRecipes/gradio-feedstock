@@ -2,9 +2,6 @@
 
 set -e  # Exit on any error
 
-echo "Node.js version: $(node --version)"
-echo "pnpm version: $(pnpm --version)"
-
 # First install the Python package (needed for frontend build)
 echo "Installing package with pip first..."
 $PYTHON -m pip install . -vv --no-deps --no-build-isolation

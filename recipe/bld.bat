@@ -1,11 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo Node.js version:
-call node --version
-echo pnpm version:
-call pnpm --version
-
 REM First install the Python package (needed for frontend build)
 echo Installing package with pip first...
 %PYTHON% -m pip install . -vv --no-deps --no-build-isolation
