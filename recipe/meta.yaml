@@ -8,13 +8,12 @@ package:
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gradio-{{ version }}.tar.gz
   sha256: c06faa324ae06c3892c8b4b4e73c706c4520d380f6b9e52a3c02dc53a7627ba9
-  # url: https://github.com/gradio-app/gradio/archive/gradio@{{ version }}.tar.gz
-
 
 build:
   entry_points:
     - gradio = gradio.cli:cli
     - upload_theme = gradio.themes.upload_theme:main
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: true  # [py<310]
   number: 0
 
@@ -69,9 +68,9 @@ test:
     - pip
 
 about:
-  home: https://www.gradio.app/
+  home: https://www.gradio.app
   dev_url: https://github.com/gradio-app/gradio
-  doc_url: https://www.gradio.app/
+  doc_url: https://www.gradio.app
   summary: Python library for easily interacting with trained machine learning models
   description: |
     Gradio is an open-source Python package that allows you to quickly build a demo or web application
