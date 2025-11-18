@@ -6,70 +6,37 @@ package:
   version: {{ version }}
 
 source:
-  #url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gradio-{{ version }}.tar.gz currently not avalaible
-  sha256: ba2ddf5f220f9f9e06e6109d4ddd3d21a7a9b19659df1fb62116db713689334f
-  url: https://github.com/gradio-app/gradio/archive/gradio@{{ version }}.tar.gz
-
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gradio-{{ version }}.tar.gz
+  sha256: c06faa324ae06c3892c8b4b4e73c706c4520d380f6b9e52a3c02dc53a7627ba9
 
 build:
   entry_points:
     - gradio = gradio.cli:cli
     - upload_theme = gradio.themes.upload_theme:main
-  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<310]
   number: 0
 
 requirements:
-  build:
-    - nodejs >=14
-    - pnpm =9
   host:
-    - python {{ python_min }}
+    - python
+    - pip
     - hatchling
     - hatch-requirements-txt
     - hatch-fancy-pypi-readme >=22.5.0
-    - pip
-    # copied from below
-    - aiofiles >=22.0,<25.0
-    - anyio >=3.0,<5.0
-    #- audioop-lts <1.0 Not yet avalaible yet and only work with python 313
-    - fastapi >=0.115.2,<1.0
-    - ffmpy
-    - groovy-python >=0.1,<0.2
-    - gradio-client ==1.13.3
-    - httpx >=0.24.1
-    - huggingface_hub >=0.28.1
-    - jinja2 <4.0
-    - markupsafe >=2.0,<4.0
-    - numpy >=1.0,<3.0
-    - orjson >=3.0,<4.0
-    - packaging
-    - pandas >=1.0,<3.0
-    - pillow >=8.0,<12.0
-    - pydantic >=2.0,<2.12
-    - python-multipart >=0.0.18
-    - pydub
-    - pyyaml >=5.0,<7.0
-    - ruff >=0.9.3
-    - safehttpx >=0.1.6,<0.2.0
-    - semantic_version >=2.0,<3.0
-    - starlette >=0.40.0,<1.0
-    - tomlkit >=0.12.0,<0.14.0
-    - typer >=0.12,<1.0
-    - typing-extensions ~=4.0
-    - urllib3 ~=2.0
-    - uvicorn >=0.14.0
-
   run:
-    - python >={{ python_min }},<3.13
+    - python
     - aiofiles >=22.0,<25.0
     - anyio >=3.0,<5.0
-    #- audioop-lts <1.0 Not yet avalaible yet and only work with python 313
+    # this is a replacement for the built-in 'audioop' module removed in Python 3.13 (and needed for pydub)
+    - audioop-lts <1.0  # [py>=313]
+    - brotli-python >=1.1.0
     - fastapi >=0.115.2,<1.0
     - ffmpy
     - groovy-python >=0.1,<0.2
     - gradio-client ==1.13.3
-    - httpx >=0.24.1
-    - huggingface_hub >=0.28.1
+    - httpx >=0.24.1,<1.0
+    - huggingface_hub >=0.33.5,<2.0
     - jinja2 <4.0
     - markupsafe >=2.0,<4.0
     - numpy >=1.0,<3.0
@@ -78,37 +45,147 @@ requirements:
     - pandas >=1.0,<3.0
     - pillow >=8.0,<12.0
     - pydantic >=2.0,<2.12
-    - python-multipart >=0.0.18
+    - python-multipart >=0.0.18 # required for fastapi forms.
     - pydub
     - pyyaml >=5.0,<7.0
-    - ruff >=0.9.3
+    - ruff >=0.9.3 # needed here for custom component docs generation
     - safehttpx >=0.1.6,<0.2.0
     - semantic_version >=2.0,<3.0
     - starlette >=0.40.0,<1.0
     - tomlkit >=0.12.0,<0.14.0
     - typer >=0.12,<1.0
-    - typing-extensions ~=4.0
-    - urllib3 ~=2.0
+    - typing_extensions >=4.0,<5.0
     - uvicorn >=0.14.0
 
 test:
   imports:
     - gradio
-  commands:
+    - gradio._simple_templates
+    - gradio.analytics
+    - gradio.block_function
+    - gradio.blocks
+    - gradio.blocks_events
+    - gradio.brotli_middleware
+    - gradio.chat_interface
+    - gradio.cli
+    - gradio.cli.commands.components._docs_utils
+    - gradio.cli.commands.components.docs
+    - gradio.cli.commands.components.install_component
+    - gradio.cli.commands.display
+    - gradio.component_meta
+    - gradio.components
+    - gradio.components.annotated_image
+    - gradio.components.audio
+    - gradio.components.base
+    - gradio.components.browser_state
+    - gradio.components.button
+    - gradio.components.chatbot
+    - gradio.components.checkbox
+    - gradio.components.checkboxgroup
+    - gradio.components.clear_button
+    - gradio.components.code
+    - gradio.components.color_picker
+    - gradio.components.dataframe
+    - gradio.components.dataset
+    - gradio.components.datetime
+    - gradio.components.deep_link_button
+    - gradio.components.dialogue
+    - gradio.components.download_button
+    - gradio.components.dropdown
+    - gradio.components.duplicate_button
+    - gradio.components.fallback
+    - gradio.components.file
+    - gradio.components.file_explorer
+    - gradio.components.gallery
+    - gradio.components.highlighted_text
+    - gradio.components.html
+    - gradio.components.image
+    - gradio.components.image_editor
+    - gradio.components.imageslider
+    - gradio.components.json_component
+    - gradio.components.label
+    - gradio.components.login_button
+    - gradio.components.markdown
+    - gradio.components.model3d
+    - gradio.components.multimodal_textbox
+    - gradio.components.native_plot
+    - gradio.components.navbar
+    - gradio.components.number
+    - gradio.components.paramviewer
+    - gradio.components.plot
+    - gradio.components.radio
+    - gradio.components.slider
+    - gradio.components.state
+    - gradio.components.textbox
+    - gradio.components.timer
+    - gradio.components.upload_button
+    - gradio.components.video
+    - gradio.context
+    - gradio.data_classes
+    - gradio.events
+    - gradio.exceptions
+    - gradio.external
+    - gradio.flagging
+    - gradio.helpers
+    - gradio.i18n
+    - gradio.image_utils
+    - gradio.interface
+    - gradio.ipython_ext
+    - gradio.layouts
+    - gradio.layouts.column
+    - gradio.layouts.row
+    - gradio.media
+    - gradio.node_server
+    - gradio.oauth
+    - gradio.pipelines
+    - gradio.pipelines_utils
+    - gradio.processing_utils
+    - gradio.renderable
+    - gradio.route_utils
+    - gradio.routes
+    - gradio.screen_recording_utils
+    - gradio.server_messages
+    - gradio.sketch
+    - gradio.sketch.run
+    - gradio.sketch.sketchbox
+    - gradio.sketch.utils
+    - gradio.state_holder
+    - gradio.templates
+    - gradio.themes
+    - gradio.themes.base
+    - gradio.themes.citrus
+    - gradio.themes.default
+    - gradio.themes.glass
+    - gradio.themes.monochrome
+    - gradio.themes.ocean
+    - gradio.themes.origin
+    - gradio.themes.soft
+    - gradio.themes.utils
+    - gradio.themes.utils.colors
+    - gradio.themes.utils.fonts
+    - gradio.themes.utils.readme_content
+    - gradio.themes.utils.sizes
+    - gradio.themes.utils.theme_dropdown
+    - gradio.tunneling
+    - gradio.utils
+  commands: # skipping pytest as there are too many dependencies to add
     - pip check
     - gradio --help
     - upload_theme --help
   requires:
-    - python {{ python_min }}
     - pip
 
 about:
-  home: https://pypi.org/project/gradio/
+  home: https://www.gradio.app
   dev_url: https://github.com/gradio-app/gradio
+  doc_url: https://www.gradio.app
   summary: Python library for easily interacting with trained machine learning models
+  description: |
+    Gradio is an open-source Python package that allows you to quickly build a demo or web application
+    for your machine learning model, API, or any arbitrary Python function.
   license: Apache-2.0
-  license_file:
-    - LICENSE
+  license_file: LICENSE
+  license_family: Apache
 
 extra:
   recipe-maintainers:
