@@ -1,5 +1,5 @@
 {% set name = "gradio" %}
-{% set version = "5.49.1" %}
+{% set version = "6.14.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/gradio-{{ version }}.tar.gz
-  sha256: c06faa324ae06c3892c8b4b4e73c706c4520d380f6b9e52a3c02dc53a7627ba9
+  sha256: 4972ef7d01ac57472772624eb4e095767b6c8f3cd4846b7fea648e8034cda9f8
 
 build:
   entry_points:
@@ -19,22 +19,21 @@ build:
 
 requirements:
   host:
-    - python
     - pip
+    - python
     - hatchling
     - hatch-requirements-txt
     - hatch-fancy-pypi-readme >=22.5.0
   run:
     - python
-    - aiofiles >=22.0,<25.0
     - anyio >=3.0,<5.0
     # this is a replacement for the built-in 'audioop' module removed in Python 3.13 (and needed for pydub)
-    - audioop-lts <1.0  # [py>=313]
+    - audioop-lts <=0.2.2  # [py>=313]
     - brotli-python >=1.1.0
     - fastapi >=0.115.2,<1.0
-    - ffmpy
     - groovy-python >=0.1,<0.2
-    - gradio-client ==1.13.3
+    - gradio-client ==2.5.0
+    - hf-gradio >=0.4.1,<1.0
     - httpx >=0.24.1,<1.0
     - huggingface_hub >=0.33.5,<2.0
     - jinja2 <4.0
@@ -42,20 +41,21 @@ requirements:
     - numpy >=1.0,<3.0
     - orjson >=3.0,<4.0
     - packaging
-    - pandas >=1.0,<3.0
-    - pillow >=8.0,<12.0
-    - pydantic >=2.0,<2.12
-    - python-multipart >=0.0.18 # required for fastapi forms.
-    - pydub
+    - pandas >=1.0,<4.0
+    - pillow >=8.0,<13.0
+    - pydantic >=2.0,<3
+    - python-multipart >=0.0.18,<1
+    - pydub <1.0
     - pyyaml >=5.0,<7.0
     - ruff >=0.9.3 # needed here for custom component docs generation
-    - safehttpx >=0.1.6,<0.2.0
+    - safehttpx >=0.1.7,<0.2.0
     - semantic_version >=2.0,<3.0
     - starlette >=0.40.0,<1.0
-    - tomlkit >=0.12.0,<0.14.0
+    - tomlkit >=0.12.0,<0.15.0
     - typer >=0.12,<1.0
     - typing_extensions >=4.0,<5.0
     - uvicorn >=0.14.0
+    - pytz >=2017.2
 
 test:
   imports:
