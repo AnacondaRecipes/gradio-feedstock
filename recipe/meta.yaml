@@ -1,5 +1,5 @@
 {% set name = "gradio" %}
-{% set version = "6.20.0" %}
+{% set version = "6.28.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8672866e9225a1f8297325a6742bb525a3a0ddc8aa4d75d99beb10a27ea2915f
+  sha256: 2ff6d505a1a631a5a4b20626cd7c2b9a202b9a479698af4049f6874102e86266
 
 build:
   number: 0
@@ -21,7 +21,7 @@ requirements:
   host:
     - pip
     - python
-    - hatchling
+    - hatchling >=1.27
     - hatch-requirements-txt
     - hatch-fancy-pypi-readme >=22.5.0
   run:
