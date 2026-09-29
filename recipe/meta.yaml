@@ -1,5 +1,5 @@
 {% set name = "gradio" %}
-{% set version = "6.20.0" %}
+{% set version = "6.28.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8672866e9225a1f8297325a6742bb525a3a0ddc8aa4d75d99beb10a27ea2915f
+  sha256: 2ff6d505a1a631a5a4b20626cd7c2b9a202b9a479698af4049f6874102e86266
 
 build:
   number: 0
@@ -21,7 +21,7 @@ requirements:
   host:
     - pip
     - python
-    - hatchling
+    - hatchling >=1.27
     - hatch-requirements-txt
     - hatch-fancy-pypi-readme >=22.5.0
   run:
@@ -32,10 +32,10 @@ requirements:
     - brotli-python >=1.1.0
     - fastapi >=0.115.2,<1.0
     - groovy-python >=0.1,<0.2
-    - gradio-client ==2.5.0
+    - gradio-client ==2.7.1
     - hf-gradio >=0.4.1,<1.0
     - httpx >=0.24.1,<1.0
-    - huggingface_hub >=1.2.0,<2.0
+    - huggingface_hub >=1.16.0,<2.0
     - jinja2 <4.0
     - markupsafe >=2.0,<4.0
     - numpy >=1.0,<3.0
@@ -43,7 +43,7 @@ requirements:
     - packaging
     - pandas >=1.0,<4.0
     - pillow >=8.0,<13.0
-    - pydantic >=2.0,<3
+    - pydantic >=2.0,<=3.0
     - python-multipart >=0.0.18,<1
     - pydub <1.0
     - pyyaml >=5.0,<7.0
