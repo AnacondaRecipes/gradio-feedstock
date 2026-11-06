@@ -15,7 +15,8 @@ build:
   entry_points:
     - gradio = gradio.cli:cli
     - upload_theme = gradio.themes.upload_theme:main
-  skip: true  # [py<310]
+    # missing tomlkit for win-arm64
+  skip: true  # [py<310 or (win and arm64)]
 
 requirements:
   host:
