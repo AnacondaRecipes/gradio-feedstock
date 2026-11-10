@@ -10,13 +10,12 @@ source:
   sha256: e7309025b692579b8829e985f6babf3c6476b598b02ced2b5dd6fcc9713b939e
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - gradio = gradio.cli:cli
     - upload_theme = gradio.themes.upload_theme:main
-    # missing tomlkit for win-arm64
-  skip: true  # [py<310 or (win and arm64)]
+  skip: true  # [py<310]
 
 requirements:
   host:
